@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TicTacSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKf-LT-eIq" customClass="BoardView" customModule="TicTacSwift" customModuleProvider="target">
+                                <rect key="frame" x="16" y="80" width="288" height="288"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gKf-LT-eIq" secondAttribute="height" multiplier="1:1" id="kd4-lU-Ux2"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="viewController" destination="BYZ-38-t0r" id="ga6-x8-3Uf"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dET-9i-DDo">
+                                <rect key="frame" x="116" y="376" width="89" height="30"/>
+                                <state key="normal" title="Reset Puzzle"/>
+                                <connections>
+                                    <action selector="resetPuzzle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R6e-RW-jwE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Do4-pV-ykO">
+                                <rect key="frame" x="264" y="28" width="44" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="EgV-A6-i9B"/>
+                                    <constraint firstAttribute="height" constant="30" id="OGG-4e-N3x"/>
+                                </constraints>
+                                <state key="normal" title="Play O"/>
+                                <connections>
+                                    <action selector="playO:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R6o-AH-E2P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbz-Zl-jzu">
+                                <rect key="frame" x="12" y="28" width="43" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="43" id="4HV-7D-yOc"/>
+                                    <constraint firstAttribute="height" constant="30" id="gfb-8G-YRS"/>
+                                </constraints>
+                                <state key="normal" title="Play X"/>
+                                <connections>
+                                    <action selector="playX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8xD-hf-LtP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gbz-Zl-jzu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="9jw-ch-xrg"/>
+                            <constraint firstItem="dET-9i-DDo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BUP-6s-5fb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Do4-pV-ykO" secondAttribute="trailing" constant="-4" id="KHc-w1-55V"/>
+                            <constraint firstItem="gKf-LT-eIq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="Ls3-1I-NDx"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="gKf-LT-eIq" secondAttribute="leading" id="Otf-NI-FUL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gKf-LT-eIq" secondAttribute="trailing" id="XS2-2B-HKx"/>
+                            <constraint firstItem="gKf-LT-eIq" firstAttribute="top" secondItem="Gbz-Zl-jzu" secondAttribute="bottom" constant="22" id="gbj-4q-Ywx"/>
+                            <constraint firstItem="dET-9i-DDo" firstAttribute="top" secondItem="gKf-LT-eIq" secondAttribute="bottom" constant="8" id="kT3-6P-fqI"/>
+                            <constraint firstItem="gKf-LT-eIq" firstAttribute="top" secondItem="Do4-pV-ykO" secondAttribute="bottom" constant="22" id="zE5-9y-XWG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="boardView" destination="gKf-LT-eIq" id="bFu-J6-NDp"/>
+                        <outlet property="playOButton" destination="Do4-pV-ykO" id="g6F-d9-lr3"/>
+                        <outlet property="playXButton" destination="Gbz-Zl-jzu" id="tt5-f3-yKC"/>
+                        <outlet property="resetPuzzleButton" destination="dET-9i-DDo" id="VaT-Nh-1c9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="202" y="315"/>
+        </scene>
+    </scenes>
+</document>
