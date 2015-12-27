@@ -108,6 +108,11 @@ class Board: NSObject, NSCopying {
                 if (-eval > maximum)
                 {
                     maximum = -eval;
+                    if (maximum > 0)
+                    {
+                        return (index, maximum)
+                    }
+
                     bestMoves.removeAllObjects()
                     bestMoves.addObject(index)
                 }

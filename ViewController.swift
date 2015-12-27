@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     let board = Board()
     var onMove = 1
+    var playerMove = 0
     var playing = false
     var timer: NSTimer?
     
@@ -29,6 +30,11 @@ class ViewController: UIViewController {
 
     func squareTapped(recognizer: UITapGestureRecognizer)
     {
+        if (!self.playing) || (playerMove != onMove)
+        {
+            return
+        }
+        
         let view = recognizer.view as! SquareView
         let index = view.tag - 1
         
@@ -55,11 +61,28 @@ class ViewController: UIViewController {
     
     @IBAction func playX(sender: AnyObject)
     {
+        if self.playing
+        {
+            return
+        }
         
+        self.playing = true
+        self.onMove = 1
+        self.playerMove = 1
     }
 
     @IBAction func playO(sender: AnyObject)
     {
+        if self.playing
+        {
+            return
+        }
+        
+        self.playing = true
+        self.onMove = 1
+        self.playerMove = 2
+        
+        self.computerPlay()
     }
 
     @IBAction func resetPuzzle(sender: AnyObject)
@@ -69,6 +92,7 @@ class ViewController: UIViewController {
         self.boardView.setNeedsDisplay()
         
         self.onMove = 1
+        self.playing = false
     }
     
     func setComputerMoveTimer()
@@ -78,11 +102,16 @@ class ViewController: UIViewController {
     
     func computerPlay()
     {
+        if onMove == playerMove
+        {
+            return
+        }
+        
         self.timer?.invalidate()
         
         let (index, _) = self.board.bestMove(onMove, depth: 0)
         let squareView = self.boardView.squares[index] as! SquareView
-        
+
         squareView.squareValue = onMove
         self.board.setSquare(index, value: onMove)
         onMove = 3 - onMove
