@@ -32,15 +32,15 @@ class SquareView: UIView {
                 CGContextAddLineToPoint(c, size.width * (1 - inset), size.height * (1 - inset))
                 CGContextMoveToPoint(c, size.width * (1 - inset), size.height * inset)
                 CGContextAddLineToPoint(c, size.width * inset, size.height * (1 - inset))
-                break;
+                break
                 
             case 2:
                 CGContextSetStrokeColorWithColor(c, UIColor.redColor().CGColor)
                 CGContextAddEllipseInRect(c, CGRectInset(self.bounds, size.width * inset, size.height * inset))
-                break;
+                break
                 
             default:
-                break;
+                break
         }
         
         CGContextStrokePath(c)

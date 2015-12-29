@@ -85,9 +85,9 @@ class Board: NSObject, NSCopying {
     func bestMove(player: Int, depth: Int) -> (Int, Int) // best move and eval
     {
         let win = 100
-        let bestMoves = NSMutableArray();
-        var maximum = -win * 2;
-        var eval: Int;
+        let bestMoves = NSMutableArray()
+        var maximum = -win * 2
+        var eval: Int
         
         if self.numFree == 0
         {
@@ -109,7 +109,7 @@ class Board: NSObject, NSCopying {
                 (_, eval) = thinkBoard.bestMove(3 - player, depth: depth + 1)
                 if (-eval > maximum)
                 {
-                    maximum = -eval;
+                    maximum = -eval
                     bestMoves.removeAllObjects()
                     bestMoves.addObject(index)
                 }

@@ -38,7 +38,7 @@ class BoardView: UIView {
             
             let squareView = SquareView(frame: r)
             squareView.backgroundColor = UIColor.whiteColor()
-            squareView.tag = squareNum + 1;
+            squareView.tag = squareNum + 1
             squareView.addGestureRecognizer(UITapGestureRecognizer(target: self.viewController, action:"squareTapped:"))
             self.addSubview(squareView)
             
