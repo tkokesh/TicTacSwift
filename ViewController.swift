@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var boardView: BoardView!
     @IBOutlet weak private var playXButton: UIButton!
     @IBOutlet weak private var playOButton: UIButton!
-    @IBOutlet weak private var resetPuzzleButton: UIButton!
+    @IBOutlet weak private var statusLabel: UILabel!
     
     let board = Board()
     var onMove = 1
@@ -21,11 +21,16 @@ class ViewController: UIViewController {
     var playing = false
     var timer: NSTimer?
     
-    override func viewDidLayoutSubviews()
+    override func viewDidAppear(animated: Bool)
     {
-        super.viewDidLayoutSubviews()
+        super.viewDidAppear(animated)
         
         self.boardView.setUpSquares()
+        
+        self.playXButton.layer.borderWidth = 1.0
+        self.playXButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.playOButton.layer.borderWidth = 1.0
+        self.playOButton.layer.borderColor = UIColor.lightGrayColor().CGColor
     }
 
     func squareTapped(recognizer: UITapGestureRecognizer)
@@ -49,10 +54,19 @@ class ViewController: UIViewController {
         
         view.setNeedsDisplay()
         
-        if (self.board.lastMoveEndedGame(index) || (self.board.numFree == 0))
+        if self.board.lastMoveEndedGame(index)
         {
-            print("Game over!")
+            self.statusLabel.text = "You won. Drat."
             self.playing = false
+            self.showPlayButtons(true)
+            return
+        }
+        
+        if (self.board.numFree == 0)
+        {
+            self.statusLabel.text = "Draw."
+            self.playing = false
+            self.showPlayButtons(true)
             return
         }
         
@@ -66,9 +80,14 @@ class ViewController: UIViewController {
             return
         }
         
+        self.resetBoard()
+
         self.playing = true
         self.onMove = 1
         self.playerMove = 1
+
+        self.showPlayButtons(false)
+        self.statusLabel.text = "Your move"
     }
 
     @IBAction func playO(sender: AnyObject)
@@ -77,27 +96,35 @@ class ViewController: UIViewController {
         {
             return
         }
-        
+
+        self.resetBoard()
+
         self.playing = true
         self.onMove = 1
         self.playerMove = 2
         
-        self.computerPlay()
+        self.showPlayButtons(false)
+        self.statusLabel.text = "Thinking..."
+        self.performSelectorInBackground("computerPlay", withObject: nil)
     }
 
-    @IBAction func resetPuzzle(sender: AnyObject)
+    func resetBoard()
     {
         self.board.clearBoard()
         self.boardView.resetSquareViewValues()
         self.boardView.setNeedsDisplay()
-        
-        self.onMove = 1
-        self.playing = false
+    }
+    
+    func showPlayButtons(show: Bool)
+    {
+        self.playXButton.hidden = !show
+        self.playOButton.hidden = !show
     }
     
     func setComputerMoveTimer()
     {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "computerPlay", userInfo: nil, repeats: false)
+        self.statusLabel.text = "Thinking..."
     }
     
     func computerPlay()
@@ -118,12 +145,23 @@ class ViewController: UIViewController {
 
         squareView.setNeedsDisplay()
         
-        if (self.board.lastMoveEndedGame(index) || (self.board.numFree == 0))
+        if self.board.lastMoveEndedGame(index)
         {
-            print("Game over!")
+            self.statusLabel.text = "I win!"
             self.playing = false
+            self.showPlayButtons(true)
             return
         }
+        
+        if (self.board.numFree == 0)
+        {
+            self.statusLabel.text = "Draw."
+            self.playing = false
+            self.showPlayButtons(true)
+            return
+        }
+
+        self.statusLabel.text = "Your move"
     }
 }
 
