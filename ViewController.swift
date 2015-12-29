@@ -54,11 +54,15 @@ class ViewController: UIViewController {
         
         view.setNeedsDisplay()
         
-        if self.board.lastMoveEndedGame(index)
+        let (result, solutionIndex) = self.board.lastMoveEndedGame(index)
+        if result
         {
             self.statusLabel.text = "You won. Drat."
             self.playing = false
             self.showPlayButtons(true)
+            self.boardView.boardOverlay.solutionIndex = solutionIndex
+            self.boardView.boardOverlay.hidden = false
+            self.boardView.boardOverlay.setNeedsDisplay()
             return
         }
         
@@ -81,7 +85,8 @@ class ViewController: UIViewController {
         }
         
         self.resetBoard()
-
+        self.boardView.boardOverlay.hidden = true
+        
         self.playing = true
         self.onMove = 1
         self.playerMove = 1
@@ -98,6 +103,7 @@ class ViewController: UIViewController {
         }
 
         self.resetBoard()
+        self.boardView.boardOverlay.hidden = true
 
         self.playing = true
         self.onMove = 1
@@ -145,11 +151,15 @@ class ViewController: UIViewController {
 
         squareView.setNeedsDisplay()
         
-        if self.board.lastMoveEndedGame(index)
+        let (result, solutionIndex) = self.board.lastMoveEndedGame(index)
+        if result
         {
             self.statusLabel.text = "I win!"
             self.playing = false
             self.showPlayButtons(true)
+            self.boardView.boardOverlay.solutionIndex = solutionIndex
+            self.boardView.boardOverlay.hidden = false
+            self.boardView.boardOverlay.setNeedsDisplay()
             return
         }
         

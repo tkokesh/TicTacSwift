@@ -59,10 +59,11 @@ class Board: NSObject, NSCopying {
         self.numFree--
     }
     
-    func lastMoveEndedGame(index:Int) -> Bool
+    func lastMoveEndedGame(index:Int) -> (Bool, Int)
     {
-        for solution in solutions
+        for solutionIndex in 0..<8
         {
+            let solution = solutions[solutionIndex]
             if (solution.indexOf(index) != nil)
             {
                 var product = 1
@@ -73,12 +74,12 @@ class Board: NSObject, NSCopying {
                 
                 if (product == 1) || (product == 8)
                 {
-                    return true
+                    return (true, solutionIndex)
                 }
             }
         }
         
-        return false
+        return (false, -1)
     }
     
     func bestMove(player: Int, depth: Int) -> (Int, Int) // best move and eval
@@ -99,7 +100,8 @@ class Board: NSObject, NSCopying {
             {
                 let thinkBoard = self.copy() as! Board
                 thinkBoard.setSquare(index, value: player)
-                if thinkBoard.lastMoveEndedGame(index)
+                let (result, _) = thinkBoard.lastMoveEndedGame(index)
+                if result
                 {
                     return (index, win - depth)
                 }

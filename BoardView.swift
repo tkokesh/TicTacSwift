@@ -12,12 +12,18 @@ import UIKit
 class BoardView: UIView {
     
     var squares: NSMutableArray = NSMutableArray()
+    var boardOverlay: BoardOverlayView
     @IBOutlet weak private var viewController: ViewController!
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        self.boardOverlay = BoardOverlayView(frame: CGRectZero)
+        
+        super.init(coder: aDecoder)
+    }
     
     func setUpSquares()
     {
-        self.squares = NSMutableArray()
-        
         let size = self.frame.size.width
         let lineWidth: CGFloat = 10
         let squareSize = (size - 2 * lineWidth) / 3
@@ -38,6 +44,11 @@ class BoardView: UIView {
             
             self.squares.addObject(squareView)
         }
+        
+        self.boardOverlay = BoardOverlayView(frame: self.bounds)
+        self.boardOverlay.hidden = true
+        self.boardOverlay.backgroundColor = UIColor.clearColor()
+        self.addSubview(self.boardOverlay)
     }
     
     func resetSquareViewValues()
