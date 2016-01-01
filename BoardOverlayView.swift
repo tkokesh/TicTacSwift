@@ -10,7 +10,19 @@ import UIKit
 
 class BoardOverlayView: UIView {
     
-    var solutionIndex = 0
+    enum SolutionType: Int
+    {
+        case solution_row1 = 0,
+        solution_row2,
+        solution_row3,
+        solution_col1,
+        solution_col2,
+        solution_col3,
+        solution_backslash,
+        solution_slash
+    }
+    
+    var solutionIndex: SolutionType = .solution_row1
     var squareSize: CGFloat = 0
     
     override func drawRect(rect: CGRect)
@@ -21,49 +33,44 @@ class BoardOverlayView: UIView {
         
         switch (solutionIndex)
         {
-            case 0:
+            case .solution_row1:
                 fromPt = CGPointMake(0, squareSize / 2)
                 toPt = CGPointMake(r.size.width, squareSize / 2)
                 break
 
-            case 1:
+            case .solution_row2:
                 fromPt = CGPointMake(0, r.size.height / 2)
                 toPt = CGPointMake(r.size.width, r.size.height / 2)
                 break
                 
-            case 2:
+            case .solution_row3:
                 fromPt = CGPointMake(0, r.size.height - squareSize / 2)
                 toPt = CGPointMake(r.size.width, r.size.height - squareSize / 2)
                 break
                 
-            case 3:
+            case .solution_col1:
                 fromPt = CGPointMake(squareSize / 2, 0)
                 toPt = CGPointMake(squareSize / 2, r.size.height)
                 break
                 
-            case 4:
+            case .solution_col2:
                 fromPt = CGPointMake(r.size.width / 2, 0)
                 toPt = CGPointMake(r.size.width / 2, r.size.height)
                 break
                 
-            case 5:
+            case .solution_col3:
                 fromPt = CGPointMake(r.size.width - squareSize / 2, 0)
                 toPt = CGPointMake(r.size.width - squareSize, r.size.height)
                 break
                 
-            case 6:
+            case .solution_backslash:
                 fromPt = CGPointMake(0, 0)
                 toPt = CGPointMake(r.size.width, r.size.height)
                 break
                 
-            case 7:
+            case .solution_slash:
                 fromPt = CGPointMake(0, r.size.height)
                 toPt = CGPointMake(r.size.width, 0)
-                break
-
-            default:
-                fromPt = CGPointZero
-                toPt = CGPointZero
                 break
         }
     
@@ -74,5 +81,4 @@ class BoardOverlayView: UIView {
         CGContextAddLineToPoint(c, toPt.x, toPt.y)
         CGContextStrokePath(c)
     }
-
 }
