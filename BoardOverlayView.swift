@@ -8,19 +8,21 @@
 
 import UIKit
 
+
+enum SolutionType: Int
+{
+    case solution_row1 = 0,
+    solution_row2,
+    solution_row3,
+    solution_col1,
+    solution_col2,
+    solution_col3,
+    solution_backslash,
+    solution_slash
+}
+
+
 class BoardOverlayView: UIView {
-    
-    enum SolutionType: Int
-    {
-        case solution_row1 = 0,
-        solution_row2,
-        solution_row3,
-        solution_col1,
-        solution_col2,
-        solution_col3,
-        solution_backslash,
-        solution_slash
-    }
     
     var solutionIndex: SolutionType = .solution_row1
     var squareSize: CGFloat = 0

@@ -60,7 +60,7 @@ class ViewController: UIViewController {
             self.statusLabel.text = "You won. Drat."
             self.playing = false
             self.showPlayButtons(true)
-            self.boardView.boardOverlay.solutionIndex = solutionIndex
+            self.boardView.boardOverlay.solutionIndex = SolutionType(rawValue: solutionIndex)!
             self.boardView.boardOverlay.hidden = false
             self.boardView.boardOverlay.setNeedsDisplay()
             return
@@ -157,7 +157,7 @@ class ViewController: UIViewController {
             self.statusLabel.text = "I win!"
             self.playing = false
             self.showPlayButtons(true)
-            self.boardView.boardOverlay.solutionIndex = solutionIndex
+            self.boardView.boardOverlay.solutionIndex = SolutionType(rawValue: solutionIndex)!
             self.boardView.boardOverlay.hidden = false
             self.boardView.boardOverlay.setNeedsDisplay()
             return
