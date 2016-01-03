@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak private var boardView: BoardView!
@@ -76,7 +77,12 @@ class ViewController: UIViewController {
         
         self.setComputerMoveTimer()
     }
-    
+
+    @IBAction func changedDifficulty(sender: AnyObject)
+    {
+        
+    }
+
     @IBAction func playX(sender: AnyObject)
     {
         if self.playing
